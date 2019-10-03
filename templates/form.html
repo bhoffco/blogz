@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href='../static/css/style.css'>
+  <title>User Signup</title>
+</head>
+<body>
+  <div class="container">  
+      <h1>Signup</h1>
+  </br>
+  <form action="/sign_up" method="POST">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <label for="username">Username:<span>&nbsp;</span></label>
+          </td>
+          <td>
+            <input type="text" name="username" id="username" value='{{username}}'>
+            <span class="error">{{username_error}}</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="password">Password:<span>&nbsp;</span></label>
+          </td>
+          <td>
+            <input type="password" name="password" id="password" value='{{password}}'>
+            <span class="error">{{password_error}}</span>
+          </td>
+        </tr>
+        <tr>
+            <td>
+              <label for="ver">Confirm Password:<span>&nbsp;</span></label>
+            </td>
+            <td>
+              <input type="password" name="ver" id="ver" value='{{ver}}'>
+              <span class="error">{{ver_error}}</span>
+            </td>
+          </tr>
+          <tr>
+              <td>
+                <label for="email">Email (Optional):<span>&nbsp;</span></label>
+              </td>
+              <td>
+                <input type="text" name="email" id="email" value='{{email}}'>
+                <span class="error">{{email_error}}</span>
+              </td>
+            </tr>
+      </tbody>
+    </table>
+  </br>
+  </br>
+  </br>
+    <div class="button">
+    <input class="btn" type="submit">
+    </div>
+  </form>
+  </div>
+</body>
+</html>

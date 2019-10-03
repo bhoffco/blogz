@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Add Post</title>
+</head>
+<body>
+  <div class="container">
+    <div class="container-inner">  
+      <h1>Add A <span class="yellow">POST</span></h1>
+      </br>
+      <form action="/newpost" method="POST">
+        <table>
+          <tbody>
+              <tr>
+                  <td>
+                    <span class="error">{{blog_post_error}}</span>
+                  </td>
+                </tr>
+            <tr>
+              <td>
+                <label for="blog_title">Blog Title:<span>&nbsp;</span></label>
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <input class='input' type="text" name="blog_title" id="blog_title" value='{{blog_title}}'>
+              </td>
+            </tr> 
+            <tr>
+              <td>
+                <label for="blog_post">Blog post:<span>&nbsp;</span></label>
+              </td>
+            </tr>  
+            <tr>
+              <td>
+                <textarea class='textarea' cols='50' rows='15' type="text" name="blog_post" id="blog_post">{{blog_content}}</textarea>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="button">
+        <input class="btn" type="submit" action="/">
+      </div>
+    </div>
+  </form>
+
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+{% endblock %}

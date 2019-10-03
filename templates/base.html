@@ -1,0 +1,27 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style1.css' )}}"> 
+        <title>{{title}}</title>
+    </head>
+<body>
+    <header class="head">
+        <div class="header-container">
+        <nav>
+            <ul>
+                <li><a href="/">Main Blog</a></li>
+                <li><a href="/newpost">Add a Post</a></li>
+            </ul>
+        </nav>
+    </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
