@@ -36,12 +36,12 @@ class Blog(db.Model):
 # }
 # ]
 
-# @app.route('/post/<?=post_id>')
-# def post(post_id):
+@app.route('/post/<int:post_id>')
+def post(post_id):
 
-#     post = Blog.query.filter_by(id=post_id).one()
+    post = Blog.query.filter_by(title=post_id).one()
 
-#     return render_template('post.html', title='Blog', post=post)
+    return render_template('post.html', title='Blog', post=post)
 
 # @app.route('/post?id=42')
 # def post():
@@ -54,7 +54,7 @@ class Blog(db.Model):
 
 @app.route('/')
 def index():
-    posts = Blog.query.all()
+    posts = Blog.query.order_by(Blog.id.desc()).all()
     return render_template('blog.html', title="Blog", posts=posts)
 
 @app.route('/blog', methods=['GET', 'POST'])
