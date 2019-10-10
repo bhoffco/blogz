@@ -3,19 +3,23 @@
 {% block content %}
 
   <div class="title_top">
-  <h1 class='blog-head'>Build A <span class="yellow">BLOG</span></h1>
+  <h1 class='blog-head'>Blog <span class="yellow">USERS</span></h1>
   </div>
 
   
-  {% for user in users %}
-    <div class="post-container">
-    <div class="posts">
-     <h2><a value='no_decoration' href="./blog?user={{user.id}}">{{user.email}}</a></h2>
+  
+    
+    {% for user in users %}
+    <div class="flex_grid"></div>
+      <div class="index_posts col">
+      <h3><a id='no_decoration' value='no_decoration' href="./blog?user={{user.id}}">{{user.email}}</a></h3>
      
      
-    </div> 
+      </div> 
     </div>
-  {% endfor %}
+    {% endfor %}
+   
+    
 
 
 

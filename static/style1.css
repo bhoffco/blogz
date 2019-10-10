@@ -6,12 +6,18 @@
   box-sizing: border-box
 }
 
+input {
+  width: 250px;
+  height: 100px;
+}
+
 .header-container {
   display: flex;
   flex-direction: column;
   height: 100px;
   justify-content: center;
   align-items: baseline;
+  margin-bottom: 2rem; 
   background : -moz-linear-gradient(98.05% 4.97% -152.89deg,rgba(46, 126, 255, 1) 0.56%,rgba(26, 98, 199, 1) 45.6%,rgba(0, 61, 127, 1) 100%);
   background : -webkit-linear-gradient(-152.89deg, rgba(46, 126, 255, 1) 0.56%, rgba(26, 98, 199, 1) 45.6%, rgba(0, 61, 127, 1) 100%);
   background : -webkit-gradient(linear,98.05% 4.97% ,3.52% 93.55% ,color-stop(0.0056,rgba(46, 126, 255, 1) ),color-stop(0.456,rgba(26, 98, 199, 1) ),color-stop(1,rgba(0, 61, 127, 1) ));
@@ -28,6 +34,7 @@
 
 .blog-head h1 {
   margin-bottom: 0;
+  margin-top: 4rem;
 }
 
 header ul li a{
@@ -99,7 +106,8 @@ label {
   margin-bottom: 2rem; 
   border: none;
   border-radius: 5px;
-  height: 1.5rem; 
+  height: 2rem; 
+  width: 20rem;
   box-shadow:  0px 0px 5px -2px rgba(0,0,0,.4);
 }
 
@@ -149,6 +157,59 @@ label {
   border-radius: 3px;
   box-shadow:  0px 0px 5px -2px rgba(0,0,0,.4);
   height: 60vh;
+}
+
+.index_posts {
+  color: rgba(26, 98, 199, 1);
+  padding: 1rem 1 rem;
+  margin: auto;
+  background: white;
+  border-radius: 4px;
+  box-shadow:  0px 0px 5px -2px rgba(0,0,0,.4);
+  margin-bottom: 1rem;
+  text-decoration: none;
+  width: 400px;
+}
+
+.index_posts h3 {
+  padding: 1rem 1rem;
+  text-align: center;
+} 
+
+.flex_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+  align-content: center;
+}
+
+
+#no_decoration, #no_decoration:visited {
+  text-decoration: none;
+  color: rgba(26, 98, 199, 1);
+  font-size: 1rem;
+}
+
+#no_decoration:hover {
+  color: rgb(255, 123, 0);
+}
+
+.no_decoration, .no_decoration:visited {
+  text-decoration: none;
+  color: rgba(26, 98, 199, 1);
+}
+
+.no_decoration:hover {
+  color: rgb(255, 123, 0);
+}
+
+.top_margin {
+  margin_top: 3rem;
+}
+
+.post_margin {
+  padding-top: 3rem; 
+  font-size: .75rem;
 }
 
 .underline {

@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 import re
 import os
 import jinja2   
+import hashlib
+
+
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -11,6 +14,15 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.secret_key = 'akjhfksnjlkansf884b&&$#(9kkdkh)dfdfsdfsdfsdsd'
 
 db = SQLAlchemy(app)
+
+def make_pw_hash(password):
+    return hashlib.sha256(str.encode(password)).hexdigest()
+
+def check_pw_hash(password, hash):
+    if make_pw_hash(password) == hash:
+        return True
+    
+    return False
 
 class Blog(db.Model):
 
@@ -27,16 +39,16 @@ class Blog(db.Model):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(120))
+    pw_hash = db.Column(db.String(120))
     user_posts = db.relationship('Blog', backref='owner')
     
     def __init__(self, email, password):
         self.email = email
-        self.password = password
+        self.pw_hash = make_pw_hash(password)
 
 @app.before_request
 def require_login():
-    allow_routes = ['login', 'register', 'static']
+    allow_routes = ['login', 'register', 'static', 'index']
     if request.endpoint not in allow_routes and 'email' not in session:
         return redirect('/login')
 
@@ -44,8 +56,8 @@ def require_login():
 @app.route('/')
 def index():
     
-    posts = Blog.query.order_by(Blog.id.desc()).all()
-    return render_template('index.html', title="Blog", posts=posts)
+    users = User.query.all()
+    return render_template('index.html', users = users)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -55,10 +67,10 @@ def login():
         user = User.query.filter_by(email=email).first()
         user_error = ""
         password_error = ""
-        if user and user.password == password:
+        if user and check_pw_hash(password, user.pw_hash):
             session['email'] = email
             return redirect('/newpost')
-        if user and user.password != password:
+        if user and check_pw_hash(password, user.pw_hash) != password:
             password_error = "Password is incorrect"
             return render_template('login.html', email=email, password_error=password_error)
         else:
@@ -120,11 +132,16 @@ def logout():
 def blog_post():
     logout = ""
 
-    if request.args:
+    if 'id' in request.args:
         
         id = request.args.get('id')
         posts = Blog.query.filter_by(id=id).all()
         return render_template('blog.html', title='Blog', posts=posts, logout=logout)
+
+    elif "user" in request.args:
+        user_id = request.args.get('user')
+        posts = Blog.query.filter_by(owner_id = user_id).all()
+        return render_template('blog.html', title = 'Blog', posts=posts)
 
     else:
         posts = Blog.query.order_by(Blog.id.desc()).all()
