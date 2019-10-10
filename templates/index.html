@@ -7,21 +7,15 @@
   </div>
 
   
-  {% for post in posts %}
+  {% for user in users %}
     <div class="post-container">
     <div class="posts">
-     <h2><a value='no_decoration' href="./blog?id={{post.id}}">{{post.title}}</a></h2>
-     <p>{{post.content}}</p>
+     <h2><a value='no_decoration' href="./blog?user={{user.id}}">{{user.email}}</a></h2>
+     
      
     </div> 
     </div>
   {% endfor %}
-
-  
-
- 
-  
-
 
 
 

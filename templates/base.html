@@ -13,8 +13,19 @@
         <div class="header-container">
         <nav>
             <ul>
-                <li><a href="/">Main Blog</a></li>
+                {% if 'email' in session %}
+                <li id='yellow'>Welcome, {{session.email}}</li>
+                {% endif %}
+                <li><a href="/">Home</a></li>
+                {% if 'email' not in session %}
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                {% endif %}
+                <li><a href="/blog">Main Blog</a></li>
                 <li><a href="/newpost">Add a Post</a></li>
+                {% if 'email' in session%}
+                <li><a href="/logout">Logout</a></li>
+                {% endif %}
             </ul>
         </nav>
     </div>
