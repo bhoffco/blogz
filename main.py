@@ -57,7 +57,7 @@ def require_login():
 def index():
     
     users = User.query.all()
-    return render_template('index.html', users = users)
+    return render_template('index.html', users = users, title='Blogz')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -72,13 +72,13 @@ def login():
             return redirect('/newpost')
         if user and check_pw_hash(password, user.pw_hash) != password:
             password_error = "Password is incorrect"
-            return render_template('login.html', email=email, password_error=password_error)
+            return render_template('login.html', email=email, password_error=password_error, title='Blogz')
         else:
             # todo - explain why login failed
             user_error = "User does not exist"
-            return render_template('login.html', user_error=user_error)
+            return render_template('login.html', user_error=user_error, title='Blogz')
 
-    return render_template('login.html')
+    return render_template('login.html', title='Blogz')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -101,7 +101,7 @@ def register():
 
         if existing_user and not email_error:
             user_exists_error = "Duplicate user"
-            return render_template('signup.html', email=email, user_exists_error=user_exists_error)
+            return render_template('signup.html', email=email, user_exists_error=user_exists_error, title='Blogz')
         
 
         elif len(password) < 3 or len(password) > 20:
@@ -119,9 +119,9 @@ def register():
             return redirect('/')
         
 
-        return render_template('signup.html', email_error=email_error, email=email, password=password, password_error=password_error, verify_error=verify_error)
+        return render_template('signup.html', email_error=email_error, email=email, password=password, password_error=password_error, verify_error=verify_error, title='Blogz')
 
-    return render_template('signup.html')
+    return render_template('signup.html', title='Blogz')
 
 @app.route('/logout')
 def logout():
@@ -135,17 +135,17 @@ def blog_post():
     if 'id' in request.args:
         
         id = request.args.get('id')
-        posts = Blog.query.filter_by(id=id).all()
-        return render_template('blog.html', title='Blog', posts=posts, logout=logout)
+        posts = Blog.query.filter_by(id=id).order_by(Blog.id.desc()).all()
+        return render_template('blog.html', title='Blogz', posts=posts, logout=logout)
 
     elif "user" in request.args:
         user_id = request.args.get('user')
-        posts = Blog.query.filter_by(owner_id = user_id).all()
-        return render_template('blog.html', title = 'Blog', posts=posts)
+        posts = Blog.query.filter_by(owner_id = user_id).order_by(Blog.id.desc()).all()
+        return render_template('blog.html', title ='Blogz', posts=posts)
 
     else:
         posts = Blog.query.order_by(Blog.id.desc()).all()
-        return render_template('blog.html', title='Blog', posts=posts)
+        return render_template('blog.html', title='Blogz', posts=posts)
 
 @app.route('/newpost', methods=['POST', 'GET'])
 def newp():
@@ -174,7 +174,7 @@ def newp():
 
     else:
 
-        return render_template('newpost.html', blog_post_error=blog_post_error, blog_title=blog_title, blog_content=blog_content)
+        return render_template('newpost.html', blog_post_error=blog_post_error, blog_title=blog_title, blog_content=blog_content, title='Blogz')
 
 if __name__ == '__main__':  
     app.run()
